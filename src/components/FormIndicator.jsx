@@ -9,7 +9,7 @@ const FormIndicator = ({ currentPage }) => {
   };
 
   return (
-    <div className="sidebar-container">
+    <div className="sidebar-container" role="main">
       <div className="indicator-container">
         <span
           className="indicator-indicator"

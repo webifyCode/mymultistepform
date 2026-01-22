@@ -144,7 +144,7 @@ const Form = () => {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container" role="main">
       <FormIndicator currentPage={currentPage}></FormIndicator>
       <form onSubmit={(e) => e.preventDefault()} action="" noValidate>
         {pages[currentPage]}
