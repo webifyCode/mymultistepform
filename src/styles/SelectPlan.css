@@ -1,0 +1,104 @@
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.plan {
+  color: hsl(231, 11%, 63%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(231, 11%, 63%);
+  cursor: pointer;
+}
+
+.plan:hover {
+  border: 1px solid hsl(243, 100%, 62%);
+}
+
+.plan img {
+  margin-bottom: 3rem;
+}
+
+.plan strong,
+.plan span,
+.promo {
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.selected {
+  border: 2px solid hsl(243, 100%, 62%);
+  background-color: hsl(217, 100%, 97%);
+}
+
+.cycle {
+  display: none;
+}
+
+.cycle-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  background-color: hsl(217, 100%, 97%);
+}
+
+label {
+  color: hsl(231, 11%, 63%);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.toggled {
+  color: hsl(213, 96%, 18%);
+}
+
+.switch-container {
+  height: 15px;
+  width: 35px;
+  margin: 0 1rem;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  background-color: hsl(213, 96%, 18%);
+  display: flex;
+}
+
+.switch {
+  height: 100%;
+  width: 45%;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.yearly-selected {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 1024px) {
+  .plans {
+    grid-template-columns: 1fr;
+  }
+
+  .plan {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .plan img {
+    margin-bottom: 0;
+  }
+
+  .plan-details {
+    margin-left: 1rem;
+  }
+
+  .plan strong {
+    margin: 0;
+  }
+}

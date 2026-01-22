@@ -1,0 +1,32 @@
+.inputs-container {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+form h4 {
+  margin: 1.5rem 0 0.5rem 0;
+  color: hsl(213, 96%, 18%);
+}
+
+.error {
+  display: block;
+  color: hsl(354, 84%, 57%);
+  text-align: right;
+}
+
+.inputs-container input {
+  height: 30px;
+  padding-left: 1rem;
+  border-radius: 0.3rem;
+  border: 1px solid hsl(231, 11%, 63%);
+  color: hsl(213, 96%, 18%);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.inputs-container input:focus {
+  border: 1px solid hsl(213, 96%, 18%);
+}

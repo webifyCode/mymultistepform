@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.form-container {
+  padding: 0.5rem;
+  display: grid;
+  height: 100%;
+  grid-template-columns: 2fr 3fr;
+}
+
+form {
+  margin: 2rem 10rem 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title,
+.summary h3,
+.plan-price,
+.addon-price,
+.inputs-container h3,
+.plan strong,
+.promo {
+  color: hsl(213, 96%, 18%);
+}
+
+.blurb {
+  margin: 1rem 0;
+  color: hsl(231, 11%, 63%);
+}
+
+.buttons-container {
+  display: flex;
+  padding: 0;
+  margin-top: auto;
+  background-color: white;
+}
+
+.buttons-mobile {
+  display: none;
+}
+
+button {
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.back {
+  margin: 0;
+  padding: 0;
+  background-color: inherit;
+  color: hsl(231, 11%, 63%);
+}
+
+.back:hover {
+  color: hsl(213, 96%, 18%);
+}
+
+.forward {
+  color: white;
+  background-color: hsl(213, 96%, 18%);
+}
+
+.forward:hover {
+  opacity: 90%;
+}
+
+.last {
+  background-color: hsl(243, 100%, 62%);
+}
+
+.last:hover {
+  background-color: hsl(228, 100%, 84%);
+}
+
+@media (max-width: 1024px) {
+  .form-container {
+    grid-template-columns: 1fr;
+    position: relative;
+    padding: 0;
+    background-color: hsl(218, 100%, 97%);
+  }
+
+  form {
+    margin: 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    width: calc(100vw - 60px);
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .inputs-container {
+    margin-bottom: 0;
+  }
+
+  .buttons-mobile {
+    display: flex;
+    padding: 1rem;
+  }
+
+  .buttons-large {
+    display: none;
+  }
+}
