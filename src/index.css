@@ -3,16 +3,17 @@
   padding: 0;
 }
 
-html,
-body,
-#root {
-  height: 100%;
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-container {
-  padding: 0.5rem;
+  padding: 1rem;
   display: grid;
-  height: 100%;
   grid-template-columns: 2fr 3fr;
 }
 
