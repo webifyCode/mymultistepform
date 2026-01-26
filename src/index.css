@@ -9,12 +9,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .form-container {
   padding: 1rem;
   display: grid;
   grid-template-columns: 2fr 3fr;
+  background-color: white;
+  border-radius: 0.5rem;
 }
 
 form {
