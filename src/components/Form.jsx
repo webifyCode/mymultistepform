@@ -159,14 +159,15 @@ const Form = () => {
         </div>
       </form>
 
-      <div className="buttons-container buttons-mobile">
+          {currentPage !== "thanks" && (<div className="buttons-container buttons-mobile">
         {currentPage !== "personalInfo" && currentPage !== "thanks" && (
           <Back onPrev={prevStep} />
         )}
         {currentPage !== "thanks" && (
           <Continue currentPage={currentPage} onNext={nextPage} />
         )}
-      </div>
+      </div>)}
+      
     </div>
   );
 };

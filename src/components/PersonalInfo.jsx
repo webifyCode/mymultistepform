@@ -27,7 +27,7 @@ const PersonalInfo = ({
     }
   }
 
-  const errorStyle = { border: "2px solid hsl(354, 84%, 57%)" };
+  const errorStyle = { border: "1px solid hsl(354, 84%, 57%)" };
 
   return (
     <>
