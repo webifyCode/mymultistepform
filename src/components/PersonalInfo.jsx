@@ -36,8 +36,10 @@ const PersonalInfo = ({
         Please provide your name, email address, and phone number.
       </p>
       <div className="inputs-container">
-        <h4> Name</h4>
-        {errors.name && <span className="error">{errors.name}</span>}
+        <div className="input-label">
+          <h4> Name</h4>
+          {errors.name && <span className="error">{errors.name}</span>}
+        </div>
         <input
           type="text"
           name="name"
@@ -50,8 +52,10 @@ const PersonalInfo = ({
           style={errors.name ? errorStyle : null}
         />
         <div className="error"></div>
-        <h4> Email Address</h4>
-        {errors.email && <span className="error">{errors.email}</span>}
+        <div className="input-label">
+          <h4> Email Address</h4>
+          {errors.email && <span className="error">{errors.email}</span>}
+        </div>
         <input
           type="email"
           name="email"
@@ -63,8 +67,10 @@ const PersonalInfo = ({
           }}
           style={errors.email ? errorStyle : null}
         />
-        <h4> Phone Number </h4>
-        {errors.phone && <span className="error">{errors.phone}</span>}
+        <div className="input-label">
+          <h4> Phone Number </h4>
+          {errors.phone && <span className="error">{errors.phone}</span>}
+        </div>
         <input
           type="tel"
           name="phone"
