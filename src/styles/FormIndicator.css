@@ -1,9 +1,11 @@
 .sidebar-container {
   background: url(../assets/images/bg-sidebar-desktop.svg);
-  background-size: contain;
-  background-position: left bottom;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   padding: 2rem;
+  border-radius: 1em;
+  margin-right: 4em;
 }
 
 .indicator-container {
