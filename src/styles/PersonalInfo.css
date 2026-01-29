@@ -9,11 +9,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin: 1.5rem 0 0.5rem 0;
 }
 
 form h4 {
-  margin: 1.5rem 0 0.5rem 0;
   color: hsl(213, 96%, 18%);
 }
 
