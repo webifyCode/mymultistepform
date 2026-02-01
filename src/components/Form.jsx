@@ -158,8 +158,10 @@ const Form = () => {
             <Continue currentPage={currentPage} onNext={nextPage} />
           )}
         </div>
-
-        {currentPage !== "thanks" && (<div className="buttons-container buttons-mobile">
+        
+      </form>
+          
+          {currentPage !== "thanks" && (<div className="buttons-container buttons-mobile">
         {currentPage !== "personalInfo" && currentPage !== "thanks" && (
           <Back onPrev={prevStep} />
         )}
@@ -167,10 +169,6 @@ const Form = () => {
           <Continue currentPage={currentPage} onNext={nextPage} />
         )}
       </div>)}
-
-      </form>
-          
-          
       
     </div>
   );
