@@ -146,6 +146,7 @@ const Form = () => {
   return (
     <div className="form-container" role="main">
       <FormIndicator currentPage={currentPage}></FormIndicator>
+      <div className="form-content">
       <form onSubmit={(e) => e.preventDefault()} action="" noValidate>
         {pages[currentPage]}
 
@@ -158,7 +159,8 @@ const Form = () => {
           )}
         </div>
       </form>
-
+          <div className="form-clone" aria-hidden="true"></div>
+</div>
           {currentPage !== "thanks" && (<div className="buttons-container buttons-mobile">
         {currentPage !== "personalInfo" && currentPage !== "thanks" && (
           <Back onPrev={prevStep} />

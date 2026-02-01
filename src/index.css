@@ -94,15 +94,15 @@ button {
 
 @media (max-width: 1024px) {
   .form-container {
-    grid-template-columns: 1fr;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     padding: 0;
     background-color: hsl(218, 100%, 97%);
   }
 
   form {
     margin: 0;
-    position: absolute;
+    position: relative;
     background-color: white;
     border-radius: 0.5rem;
     padding: 1rem;
@@ -110,6 +110,8 @@ button {
     top: 12%;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 2;
+    margin-top: -1rem;
   }
 
   .inputs-container {
