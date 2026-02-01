@@ -6,7 +6,7 @@
 
 
 
-body {
+#root {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,8 +93,12 @@ button {
 }
 
 @media (max-width: 1024px) {
+
+  #root {
+    width: 70%;
+  }
+
   .form-container {
-    display: flex;
     flex-direction: column;
     padding: 0;
     background-color: hsl(218, 100%, 97%);
@@ -106,12 +110,12 @@ button {
     background-color: white;
     border-radius: 0.5rem;
     padding: 1rem;
-    width: calc(100vw - 60px);
+    width: 80%;
     top: 12%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    margin-top: -1rem;
+    margin-top: -5rem;
   }
 
   .inputs-container {
