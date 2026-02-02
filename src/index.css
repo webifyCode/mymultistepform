@@ -1,10 +1,24 @@
+@font-face {
+  font-family: "font";
+  src: url("./assets/fonts/Ubuntu-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "font";
+  src: url("./assets/fonts/Ubuntu-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
 * {
   margin: 0;
   padding: 0;
   transition: all 0.2s ease;
 }
 
-
+html {
+  width: 100vw;
+}
 
 #root {
   display: flex;
@@ -12,6 +26,8 @@
   align-items: center;
   height: 100vh;
   background-color: hsl(218, 100%, 97%);
+  font-family: "font", sans-serif;
+
 }
 
 .form-container {
@@ -50,6 +66,10 @@ form {
   padding: 0;
   margin-top: auto;
   background-color: white;
+}
+
+.buttons-large {
+  margin-bottom: 2rem;
 }
 
 .buttons-mobile {
@@ -94,14 +114,11 @@ button {
 
 @media (max-width: 1024px) {
 
-  #root {
-    width: 70%;
-  }
-
   .form-container {
     flex-direction: column;
     padding: 0;
     background-color: hsl(218, 100%, 97%);
+    width: 100%;
   }
 
   form {
@@ -109,22 +126,23 @@ button {
     position: relative;
     background-color: white;
     border-radius: 0.5rem;
-    padding: 1rem;
+    padding: 2rem 1.5rem;
     width: 80%;
     top: 12%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
-    margin-top: -5rem;
+    margin-top: -2rem;
   }
 
-  .inputs-container {
-    margin-bottom: 0;
-  }
+  .title {
+  font-size: 24px;
+}
 
   .buttons-mobile {
     display: flex;
     padding: 1rem;
+    margin-top: 2rem;
   }
 
   .buttons-large {

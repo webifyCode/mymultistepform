@@ -24,7 +24,7 @@
 }
 
 .checkbox {
-  width: 20px;
+  min-width: 20px;
   height: 20px;
   border: 1px solid hsl(231, 11%, 63%);
   border-radius: 4px;
@@ -76,7 +76,6 @@ label strong {
 label span:last-of-type,
 label p {
   font-size: 14px;
-  white-space: nowrap;
 }
 
 .checkbox {
@@ -86,12 +85,6 @@ label p {
 @media screen and (max-width: 1024px) {
   label strong {
     font-size: 16px;
-  }
-
-  label span:last-of-type,
-  label p {
-    font-size: 14px;
-    white-space: nowrap;
   }
 
   .checkbox {

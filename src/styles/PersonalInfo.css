@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1.5rem 0 0.5rem 0;
+  margin: 1.5rem 0 0.2rem 0;
 }
 
 form h4 {
@@ -34,4 +34,10 @@ form h4 {
 
 .inputs-container input:focus {
   border: 1px solid hsl(213, 96%, 18%);
+}
+
+@media (max-width: 1024px) {
+ .inputs-container {
+    margin-bottom: 0;
+  }
 }
