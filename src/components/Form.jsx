@@ -7,6 +7,8 @@ import FinishingUp from "./FinishingUp";
 import Thanks from "./Thanks";
 import Continue from "./Continue";
 import Back from "./Back";
+import { validateField } from "../validation";
+import { PLAN_PRICES, ADD_ON_PRICES, PAGE_ORDER } from "../data";
 const Form = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -15,25 +17,6 @@ const Form = () => {
     plan: "",
     cycle: "monthly",
     addOns: [],
-    total: 0,
-  });
-
-  const [planPrices, SETPLANPRICES] = useState({
-    monthly: { arcade: 9, advanced: 12, pro: 15 },
-    yearly: { arcade: 90, advanced: 120, pro: 150 },
-  });
-
-  const [addOnPrices, SETADDONPRICES] = useState({
-    monthly: {
-      "online service": 1,
-      "larger storage": 2,
-      "customizable profile": 2,
-    },
-    yearly: {
-      "online service": 10,
-      "larger storage": 20,
-      "customizable profile": 20,
-    },
   });
 
   const [currentPage, setCurrentPage] = useState("personalInfo");
@@ -47,60 +30,34 @@ const Form = () => {
         setFormData={setFormData}
         errors={errors}
         setErrors={setErrors}
-        validator={validateField}
       />
     ),
     selectPlan: (
       <SelectPlan
         formData={formData}
         setFormData={setFormData}
-        planPrices={planPrices}
+        planPrices={PLAN_PRICES}
+        errors={errors}
+        setErrors={setErrors}
       />
     ),
     addOns: (
       <AddOns
         formData={formData}
         setFormData={setFormData}
-        addOnPrices={addOnPrices}
+        addOnPrices={ADD_ON_PRICES}
       />
     ),
     finishingUp: (
       <FinishingUp
         formData={formData}
-        planPrices={planPrices}
-        addOnPrices={addOnPrices}
+        planPrices={PLAN_PRICES}
+        addOnPrices={ADD_ON_PRICES}
         setCurrentPage={() => setCurrentPage("selectPlan")}
       />
     ),
     thanks: <Thanks />,
   };
-
-  const pageOrder = [
-    "personalInfo",
-    "selectPlan",
-    "addOns",
-    "finishingUp",
-    "thanks",
-  ];
-
-  function validateField(name, value) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const phoneRegex = /^[0-9]{7,15}$/;
-
-    if (!value || value.trim() === "") {
-      return "This field is required";
-    }
-
-    if (name === "email" && !emailRegex.test(value)) {
-      return "Please enter a valid email";
-    }
-
-    if (name === "phone" && !phoneRegex.test(value)) {
-      return "Please enter a valid phone number";
-    }
-
-    return "";
-  }
 
   function nextPage() {
     const errorsFound = {};
@@ -120,7 +77,7 @@ const Form = () => {
       }
     }
 
-    const currentIndex = pageOrder.indexOf(currentPage);
+    const currentIndex = PAGE_ORDER.indexOf(currentPage);
 
     if (currentPage === "selectPlan" && formData.plan === "") {
       errorsFound.plan = "Please select a plan";
@@ -131,45 +88,39 @@ const Form = () => {
       return;
     }
     setErrors({});
-    if (currentIndex < pageOrder.length - 1) {
-      setCurrentPage(pageOrder[currentIndex + 1]);
+    if (currentIndex < PAGE_ORDER.length - 1) {
+      setCurrentPage(PAGE_ORDER[currentIndex + 1]);
     }
   }
 
   function prevStep() {
-    const currentIndex = pageOrder.indexOf(currentPage);
+    const currentIndex = PAGE_ORDER.indexOf(currentPage);
     if (currentIndex > 0) {
-      setCurrentPage(pageOrder[currentIndex - 1]);
+      setCurrentPage(PAGE_ORDER[currentIndex - 1]);
     }
   }
 
+  // The same buttons are rendered twice: inside the form on large screens and
+  // below it on mobile (CSS shows one at a time).
+  const buttons = (className) =>
+    currentPage !== "thanks" && (
+      <div className={`buttons-container ${className}`}>
+        {currentPage !== "personalInfo" && <Back onPrev={prevStep} />}
+        <Continue currentPage={currentPage} onNext={nextPage} />
+      </div>
+    );
+
   return (
-    <div className="form-container" role="main">
+    <div className="form-container">
       <FormIndicator currentPage={currentPage}></FormIndicator>
       
       <form onSubmit={(e) => e.preventDefault()} action="" noValidate>
         {pages[currentPage]}
 
-        <div className="buttons-container buttons-large">
-          {currentPage !== "personalInfo" && currentPage !== "thanks" && (
-            <Back onPrev={prevStep} />
-          )}
-          {currentPage !== "thanks" && (
-            <Continue currentPage={currentPage} onNext={nextPage} />
-          )}
-        </div>
-        
+        {buttons("buttons-large")}
       </form>
           
-          {currentPage !== "thanks" && (<div className="buttons-container buttons-mobile">
-        {currentPage !== "personalInfo" && currentPage !== "thanks" && (
-          <Back onPrev={prevStep} />
-        )}
-        {currentPage !== "thanks" && (
-          <Continue currentPage={currentPage} onNext={nextPage} />
-        )}
-      </div>)}
-      
+      {buttons("buttons-mobile")}
     </div>
   );
 };

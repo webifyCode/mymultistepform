@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/FinishingUp.css";
+import { cycleSuffix } from "../data";
 
 const FinishingUp = ({ formData, planPrices, addOnPrices, setCurrentPage }) => {
   const planCost = planPrices?.[formData.cycle]?.[formData.plan] ?? 0;
@@ -24,30 +25,29 @@ const FinishingUp = ({ formData, planPrices, addOnPrices, setCurrentPage }) => {
               {capitalize(formData.plan)} (
               {formData.cycle === "monthly" ? "Monthly" : "Yearly"})
             </h3>
-            <a href="#" className="change" onClick={setCurrentPage}>
+            <a
+              href="#"
+              className="change"
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentPage();
+              }}
+            >
               Change
             </a>
           </span>
           <span className="plan-price">
-            {formData.plan && formData.cycle
-              ? `$${planPrices[formData.cycle][formData.plan]}/${
-                  formData.cycle === "monthly" ? "mo" : "yr"
-                }`
-              : "$0"}
+            {formData.plan ? `$${planCost}/${cycleSuffix(formData.cycle)}` : "$0"}
           </span>
         </div>
         <hr />
         <div className="addons-summary">
           {formData.addOns && formData.addOns.length > 0
-            ? formData.addOns.map((addOn, index) => (
-                <div className="addon" key={index}>
+            ? formData.addOns.map((addOn) => (
+                <div className="addon" key={addOn}>
                   <span className="addon-name">{capitalize(addOn)}</span>
                   <span className="addon-price">
-                    {formData.cycle && addOnPrices[formData.cycle][addOn]
-                      ? `+$${addOnPrices[formData.cycle][addOn]}/${
-                          formData.cycle === "monthly" ? "mo" : "yr"
-                        }`
-                      : "$0"}
+                    {`+$${addOnPrices[formData.cycle][addOn] ?? 0}/${cycleSuffix(formData.cycle)}`}
                   </span>
                 </div>
               ))
@@ -59,9 +59,7 @@ const FinishingUp = ({ formData, planPrices, addOnPrices, setCurrentPage }) => {
           Total (per {formData.cycle === "monthly" ? "month" : "year"})
         </span>
         <span className="total-price">
-          {formData.plan && formData.cycle
-            ? `$${total}/${formData.cycle === "monthly" ? "mo" : "yr"}`
-            : "$0"}
+          {formData.plan ? `$${total}/${cycleSuffix(formData.cycle)}` : "$0"}
         </span>
       </div>
     </>
