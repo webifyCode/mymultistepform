@@ -1,63 +1,30 @@
 import React from "react";
 import "../styles/FormIndicator.css";
+import { STEPS } from "../data";
+
+const selectedIndicator = {
+  backgroundColor: "hsl(206, 94%, 87%)",
+  color: "hsl(213, 96%, 18%)",
+  border: "1px solid hsl(206, 94%, 87%)",
+};
 
 const FormIndicator = ({ currentPage }) => {
-  const selectedIndicator = {
-    backgroundColor: "hsl(206, 94%, 87%)",
-    color: "hsl(213, 96%, 18%)",
-    border: "1px solid hsl(206, 94%, 87%)",
-  };
-
   return (
-    <div className="sidebar-container" role="main">
-      <div className="indicator-container">
-        <span
-          className="indicator-indicator"
-          style={currentPage === "personalInfo" ? selectedIndicator : null}
-        >
-          1
-        </span>
-        <div className="indicator-text">
-          <h5>STEP 1</h5>
-          <h4>YOUR INFO</h4>
+    <div className="sidebar-container">
+      {STEPS.map((step, index) => (
+        <div className="indicator-container" key={step.title}>
+          <span
+            className="indicator-indicator"
+            style={step.pages.includes(currentPage) ? selectedIndicator : null}
+          >
+            {index + 1}
+          </span>
+          <div className="indicator-text">
+            <h5>STEP {index + 1}</h5>
+            <h4>{step.title}</h4>
+          </div>
         </div>
-      </div>
-      <div className="indicator-container">
-        <span
-          className="indicator-indicator"
-          style={currentPage === "selectPlan" ? selectedIndicator : null}
-        >
-          2
-        </span>
-        <div className="indicator-text">
-          <h5>STEP 2</h5>
-          <h4>SELECT PLAN</h4>
-        </div>
-      </div>
-      <div className="indicator-container">
-        <span
-          className="indicator-indicator"
-          style={currentPage === "addOns" ? selectedIndicator : null}
-        >
-          3
-        </span>
-        <div className="indicator-text">
-          <h5>STEP 3</h5>
-          <h4>ADD-ONS</h4>
-        </div>
-      </div>
-      <div className="indicator-container">
-        <span
-          className="indicator-indicator"
-          style={currentPage === "finishingUp" || currentPage === "thanks" ? selectedIndicator : null}
-        >
-          4
-        </span>
-        <div className="indicator-text">
-          <h5>STEP 4</h5>
-          <h4>SUMMARY</h4>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

@@ -3,8 +3,11 @@ import arcadeIcon from "../assets/images/icon-arcade.svg";
 import advancedIcon from "../assets/images/icon-advanced.svg";
 import proIcon from "../assets/images/icon-pro.svg";
 import "../styles/SelectPlan.css";
+import { PLANS, cycleSuffix } from "../data";
 
-const SelectPlan = ({ formData, setFormData, planPrices }) => {
+const PLAN_ICONS = { arcade: arcadeIcon, advanced: advancedIcon, pro: proIcon };
+
+const SelectPlan = ({ formData, setFormData, planPrices, errors, setErrors }) => {
   function chooseCycle(e) {
     const { name, value } = e.target;
     setFormData((oldData) => ({
@@ -13,13 +16,9 @@ const SelectPlan = ({ formData, setFormData, planPrices }) => {
     }));
   }
 
-  function choosePlan(e) {
-    const target = e.currentTarget;
-    const name = target.getAttribute("name");
-    const value = target.getAttribute("value");
-    setFormData((oldData) => {
-      return { ...oldData, [name]: value };
-    });
+  function choosePlan(id) {
+    setFormData((oldData) => ({ ...oldData, plan: id }));
+    setErrors((oldErrors) => ({ ...oldErrors, plan: "" }));
   }
 
   return (
@@ -28,78 +27,40 @@ const SelectPlan = ({ formData, setFormData, planPrices }) => {
       <p className="blurb">You have the option of monthly or yearly billing.</p>
 
       <div className="plans">
-        <div
-          className={`plan ${formData.plan === "arcade" ? "selected" : ""}`}
-          name="plan"
-          value="arcade"
-          id="arcade"
-          onClick={(e) => {
-            choosePlan(e);
-          }}
-        >
-          <img src={arcadeIcon} alt="arcade-icon" />
-          <div className="plan-details">
-          <strong>Arcade</strong>
-          <span>
-            $
-            {formData.cycle === "yearly"
-              ? `${planPrices.yearly.arcade}/yr`
-              : `${planPrices.monthly.arcade}/mo`}
-          </span>
-          {formData.cycle === "yearly" ? (
-            <div className="promo">2 months free</div>
-          ) : null}
+        {PLANS.map(({ id, label }) => (
+          <div
+            key={id}
+            className={`plan ${formData.plan === id ? "selected" : ""}`}
+            id={id}
+            role="button"
+            tabIndex={0}
+            aria-pressed={formData.plan === id}
+            onClick={() => choosePlan(id)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                choosePlan(id);
+              }
+            }}
+          >
+            <img src={PLAN_ICONS[id]} alt="" />
+            <div className="plan-details">
+              <strong>{label}</strong>
+              <span>
+                ${planPrices[formData.cycle][id]}/{cycleSuffix(formData.cycle)}
+              </span>
+              {formData.cycle === "yearly" ? (
+                <div className="promo">2 months free</div>
+              ) : null}
+            </div>
           </div>
-        </div>
-        <div
-          className={`plan ${formData.plan === "advanced" ? "selected" : ""}`}
-          name="plan"
-          value="advanced"
-          id="advanced"
-          onClick={(e) => {
-            choosePlan(e);
-          }}
-        >
-          <img src={advancedIcon} alt="advanced-icon" />
-          <div className="plan-details">
-
-          <strong>Advanced</strong>
-          <span>
-            $
-            {formData.cycle === "yearly"
-              ? `${planPrices.yearly.advanced}/yr`
-              : `${planPrices.monthly.advanced}/mo`}
-          </span>
-          {formData.cycle === "yearly" ? (
-            <div className="promo">2 months free</div>
-          ) : null}
-          </div>
-        </div>
-        <div
-          className={`plan ${formData.plan === "pro" ? "selected" : ""}`}
-          name="plan"
-          value="pro"
-          id="pro"
-          onClick={(e) => {
-            choosePlan(e);
-          }}
-        >
-          <img src={proIcon} alt="pro-icon" />
-          <div className="plan-details">
-
-          <strong>Pro</strong>
-          <span>
-            $
-            {formData.cycle === "yearly"
-              ? `${planPrices.yearly.pro}/yr`
-              : `${planPrices.monthly.pro}/mo`}
-          </span>
-          {formData.cycle === "yearly" ? (
-            <div className="promo">2 months free</div>
-          ) : null}
-          </div>
-        </div>
+        ))}
       </div>
+      {errors.plan && (
+        <span className="error" role="alert">
+          {errors.plan}
+        </span>
+      )}
 
       <div className="cycle-toggle-container">
         <label
@@ -110,9 +71,7 @@ const SelectPlan = ({ formData, setFormData, planPrices }) => {
         >
           Monthly
           <input
-            onChange={(e) => {
-              chooseCycle(e);
-            }}
+            onChange={chooseCycle}
             className="cycle"
             type="radio"
             name="cycle"
@@ -136,9 +95,7 @@ const SelectPlan = ({ formData, setFormData, planPrices }) => {
         >
           Yearly
           <input
-            onChange={(e) => {
-              chooseCycle(e);
-            }}
+            onChange={chooseCycle}
             className="cycle"
             type="radio"
             name="cycle"
